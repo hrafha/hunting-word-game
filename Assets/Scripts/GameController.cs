@@ -11,9 +11,9 @@ public class GameController : MonoBehaviour
     public string[] gameWords { get; private set; }
 
     public bool[] availableThemeWords { get; private set; }
-    public bool[] wordsFound;
+    public bool[] wordsFound { get; private set; }
 
-    private void Start()
+    private void Awake()
     {
         themeWords = GetThemeWords();
         availableThemeWords = new bool[themeWords.Length];
