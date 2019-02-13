@@ -31,9 +31,9 @@ public class GameController : MonoBehaviour
     private string[] GetThemeWords()
     {
         if (theme == Theme.Frutas)
-            return new string[] { "Banana", "Uva", "Morango", "Abacaxi", "Acerola", "Manga"};
+            return new string[] { "BANANA", "UVA", "MORANGO", "ABACAXI", "ACEROLA", "MANGA"};
         if (theme == Theme.Legumes)
-            return new string[] { "Batata", "Cebola", "Milho", "Cenoura", "Abobrinha", "Gengibre" };
+            return new string[] { "BATATA", "CEBOLA", "MILHO", "CENOURA", "ABOBRINHA", "GENGIBRE" };
         return null;
     }
 

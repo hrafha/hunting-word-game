@@ -21,7 +21,7 @@ public class LevelGenerator : MonoBehaviour
 
         CheckDifficulty();
         CreateGrid();
-        SetWords();
+        FitWords();
     }
 
     private void CheckDifficulty()
@@ -55,36 +55,31 @@ public class LevelGenerator : MonoBehaviour
         }
     }
 
-    private void SetWords()
+    private void FitWords()
     {
         foreach (string word in gameController.gameWords)
         {
             int x = Random.Range(0, columns);
             int y = Random.Range(0, lines);
-            int settedLetters = 0;
-            while(settedLetters != word.Length)
+            int path = -1;
+            int lettersPlaced = 0;
+
+            while(lettersPlaced < word.Length)
             {
-                Debug.Log(word);
                 x = Random.Range(0, columns);
                 y = Random.Range(0, lines);
+                path = WordFitsIn(word, x, y);
 
-                while (!WordFitsInPosition(word, x, y))
+                while (path == -1)
                 {
                     x = Random.Range(0, columns);
                     y = Random.Range(0, lines);
+                    path = WordFitsIn(word, x, y);
                 }
-
-                for (int i = 0; i < word.Length; i++)
-                {
-                    if (gridLetter[x + i, y].value == 0)
-                        settedLetters++;
-                    else if (gridLetter[x + i, y].value == word[i] && i != word.Length)
-                        settedLetters++;
-                }
-                Debug.Log(settedLetters == word.Length);
+                // Tests if the path is valid to insert the word
+                lettersPlaced = GetWordPath(word, x, y, path, lettersPlaced);
             }
-            for (int i = 0; i < word.Length; i++)
-                gridLetter[x + i, y].SetValue(word, i);
+            InsertWord(word, x, y, path);
         }
     }
 
@@ -93,13 +88,69 @@ public class LevelGenerator : MonoBehaviour
         return new Vector3(columns, lines) + gridZeroPos.position;
     }
 
-    private bool WordFitsInPosition(string word, int x, int y)
+    private int WordFitsIn(string word, int x, int y)
     {
-        if (x + word.Length - 1 < columns) // Horizontal
-            return true;
-        /*if (y + word.Length - 1 <= lines) // Vertical
-            return true;*/
-        return false;
+        if (x + word.Length - 1 < columns && y + word.Length - 1 < lines)
+            return 0; // Diagonal
+        else if (x + word.Length - 1 < columns)
+            return 1; // Horizontal
+        else if (y + word.Length - 1 < lines)
+            return 2; // Vertical
+        return -1;
+    }
+
+    private int GetWordPath(string word, int x, int y, int way, int lettersCount)
+    {
+        if (way == 0)
+        {
+            for (int i = 0; i < word.Length; i++)
+            {
+                if (gridLetter[x + i, y + i].value == 0)
+                    lettersCount++;
+                else if (gridLetter[x + i, y + i].value == word[i])
+                    lettersCount++;
+                else
+                    return 0;
+            }
+        }
+        else if (way == 1)
+        {
+            for (int i = 0; i < word.Length; i++)
+            {
+                if (gridLetter[x + i, y].value == 0)
+                    lettersCount++;
+                else if (gridLetter[x + i, y].value == word[i])
+                    lettersCount++;
+                else
+                    return 0;
+            }
+        }
+        else if (way == 2)
+        {
+            for (int i = 0; i < word.Length; i++)
+            {
+                if (gridLetter[x, y + i].value == 0)
+                    lettersCount++;
+                else if (gridLetter[x, y + i].value == word[i])
+                    lettersCount++;
+                else
+                    return 0;
+            }
+        }
+        return lettersCount;
+    }
+
+    private void InsertWord(string word, int x, int y, int way)
+    {
+        if(way == 0) // Diagonal
+            for (int i = 0; i < word.Length; i++)
+                gridLetter[x + i, y + i].SetValue(word, i);
+        else if (way == 1) // Horizontal
+            for (int i = 0; i < word.Length; i++)
+                gridLetter[x + i, y].SetValue(word, i);
+        else if (way == 2) // Vertical
+            for (int i = 0; i < word.Length; i++)
+                gridLetter[x, y + i].SetValue(word, i);
     }
 
     public enum Difficulty { Easy, Normal, Hard };
