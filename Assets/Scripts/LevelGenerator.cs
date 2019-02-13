@@ -10,7 +10,7 @@ public class LevelGenerator : MonoBehaviour
 
     public Difficulty difficulty;
 
-    private Letter[,] gridLetter;
+    private Slot[,] slots;
 
     private int columns;
     private int lines;
@@ -46,12 +46,12 @@ public class LevelGenerator : MonoBehaviour
 
     private void CreateGrid()
     {
-        gridLetter = new Letter[columns, lines];
+        slots = new Slot[columns, lines];
         for (int i = 0; i < columns; i++)
         {
             for (int j = 0; j < lines; j++)
             {
-                gridLetter[i, j] = Instantiate(slot, GetGridPos(i, j), Quaternion.identity, transform).letter;
+                slots[i, j] = Instantiate(slot, GetGridPos(i, j), Quaternion.identity, transform);
             }
         }
     }
@@ -90,8 +90,8 @@ public class LevelGenerator : MonoBehaviour
         {
             for (int j = 0; j < lines; j++)
             {
-                if (gridLetter[i, j].value == 0)
-                    gridLetter[i, j].SetRandomValue();
+                if (slots[i, j].letter.value == 0)
+                    slots[i, j].letter.SetRandomValue();
             }
         }
     }
@@ -118,9 +118,9 @@ public class LevelGenerator : MonoBehaviour
         {
             for (int i = 0; i < word.Length; i++)
             {
-                if (gridLetter[x + i, y + i].value == 0)
+                if (slots[x + i, y + i].letter.value == 0)
                     lettersCount++;
-                else if (gridLetter[x + i, y + i].value == word[i])
+                else if (slots[x + i, y + i].letter.value == word[i])
                     lettersCount++;
                 else
                     return 0;
@@ -130,9 +130,9 @@ public class LevelGenerator : MonoBehaviour
         {
             for (int i = 0; i < word.Length; i++)
             {
-                if (gridLetter[x + i, y].value == 0)
+                if (slots[x + i, y].letter.value == 0)
                     lettersCount++;
-                else if (gridLetter[x + i, y].value == word[i])
+                else if (slots[x + i, y].letter.value == word[i])
                     lettersCount++;
                 else
                     return 0;
@@ -142,9 +142,9 @@ public class LevelGenerator : MonoBehaviour
         {
             for (int i = 0; i < word.Length; i++)
             {
-                if (gridLetter[x, y + i].value == 0)
+                if (slots[x, y + i].letter.value == 0)
                     lettersCount++;
-                else if (gridLetter[x, y + i].value == word[i])
+                else if (slots[x, y + i].letter.value == word[i])
                     lettersCount++;
                 else
                     return 0;
@@ -157,13 +157,13 @@ public class LevelGenerator : MonoBehaviour
     {
         if(way == 0) // Diagonal
             for (int i = 0; i < word.Length; i++)
-                gridLetter[x + i, y + i].SetValue(word, i);
+                slots[x + i, y + i].letter.SetValue(word, i);
         else if (way == 1) // Horizontal
             for (int i = 0; i < word.Length; i++)
-                gridLetter[x + i, y].SetValue(word, i);
+                slots[x + i, y].letter.SetValue(word, i);
         else if (way == 2) // Vertical
             for (int i = 0; i < word.Length; i++)
-                gridLetter[x, y + i].SetValue(word, i);
+                slots[x, y + i].letter.SetValue(word, i);
     }
 
     public enum Difficulty { Easy, Normal, Hard };
