@@ -9,7 +9,7 @@ public class Slot : MonoBehaviour
 
     private void Start()
     {
-        Instantiate(letter, transform.position, Quaternion.identity, transform);
+        //Instantiate(letter, transform.position, Quaternion.identity, transform);
     }
 
 }

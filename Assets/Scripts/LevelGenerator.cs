@@ -10,6 +10,8 @@ public class LevelGenerator : MonoBehaviour
 
     public Difficulty difficulty;
 
+    private Letter[,] gridLetter;
+
     private int columns;
     private int lines;
 
@@ -19,6 +21,7 @@ public class LevelGenerator : MonoBehaviour
 
         CheckDifficulty();
         CreateGrid();
+        SetWords();
     }
 
     private void CheckDifficulty()
@@ -42,18 +45,61 @@ public class LevelGenerator : MonoBehaviour
 
     private void CreateGrid()
     {
+        gridLetter = new Letter[columns, lines];
         for (int i = 0; i < columns; i++)
         {
             for (int j = 0; j < lines; j++)
             {
-                Instantiate(slot, GetGridPos(i, j), Quaternion.identity, transform);
+                gridLetter[i, j] = Instantiate(slot, GetGridPos(i, j), Quaternion.identity, transform).letter;
             }
         }
     }
 
-    private Vector3 GetGridPos(int lines, int columns)
+    private void SetWords()
     {
-        return new Vector3(lines, columns) + gridZeroPos.position;
+        foreach (string word in gameController.gameWords)
+        {
+            int x = Random.Range(0, columns);
+            int y = Random.Range(0, lines);
+            int settedLetters = 0;
+            while(settedLetters != word.Length)
+            {
+                Debug.Log(word);
+                x = Random.Range(0, columns);
+                y = Random.Range(0, lines);
+
+                while (!WordFitsInPosition(word, x, y))
+                {
+                    x = Random.Range(0, columns);
+                    y = Random.Range(0, lines);
+                }
+
+                for (int i = 0; i < word.Length; i++)
+                {
+                    if (gridLetter[x + i, y].value == 0)
+                        settedLetters++;
+                    else if (gridLetter[x + i, y].value == word[i] && i != word.Length)
+                        settedLetters++;
+                }
+                Debug.Log(settedLetters == word.Length);
+            }
+            for (int i = 0; i < word.Length; i++)
+                gridLetter[x + i, y].SetValue(word, i);
+        }
+    }
+
+    private Vector3 GetGridPos(int columns, int lines)
+    {
+        return new Vector3(columns, lines) + gridZeroPos.position;
+    }
+
+    private bool WordFitsInPosition(string word, int x, int y)
+    {
+        if (x + word.Length - 1 < columns) // Horizontal
+            return true;
+        /*if (y + word.Length - 1 <= lines) // Vertical
+            return true;*/
+        return false;
     }
 
     public enum Difficulty { Easy, Normal, Hard };
