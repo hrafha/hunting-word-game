@@ -22,6 +22,7 @@ public class LevelGenerator : MonoBehaviour
         CheckDifficulty();
         CreateGrid();
         FitWords();
+        FillEmptySlots();
     }
 
     private void CheckDifficulty()
@@ -80,6 +81,18 @@ public class LevelGenerator : MonoBehaviour
                 lettersPlaced = GetWordPath(word, x, y, path, lettersPlaced);
             }
             InsertWord(word, x, y, path);
+        }
+    }
+
+    private void FillEmptySlots()
+    {
+        for (int i = 0; i < columns; i++)
+        {
+            for (int j = 0; j < lines; j++)
+            {
+                if (gridLetter[i, j].value == 0)
+                    gridLetter[i, j].SetRandomValue();
+            }
         }
     }
 

@@ -13,4 +13,10 @@ public class Letter : MonoBehaviour
         GetComponent<Text>().text = "" + value;
     }
 
+    public void SetRandomValue()
+    {
+        value = (char)('A' + Random.Range(0, 26));
+        GetComponent<Text>().text = "" + value;
+    }
+
 }
