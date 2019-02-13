@@ -5,15 +5,16 @@ public class LevelGenerator : MonoBehaviour
 
     private GameController gameController;
 
-    [SerializeField] private Slot slot;
-    [SerializeField] private Transform gridZeroPos;
+    [SerializeField] private Slot slotPrefab;
+
+    public Transform gridZeroPos;
 
     public Difficulty difficulty;
 
-    private Slot[,] slots;
+    public Slot[,] slots { get; private set; }
 
-    private int columns;
-    private int lines;
+    public int columns { get; private set; }
+    public int lines { get; private set; }
 
     private void Start()
     {
@@ -51,7 +52,7 @@ public class LevelGenerator : MonoBehaviour
         {
             for (int j = 0; j < lines; j++)
             {
-                slots[i, j] = Instantiate(slot, GetGridPos(i, j), Quaternion.identity, transform);
+                slots[i, j] = Instantiate(slotPrefab, GetGridPos(i, j), Quaternion.identity, transform);
             }
         }
     }

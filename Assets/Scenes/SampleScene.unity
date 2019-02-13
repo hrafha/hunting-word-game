@@ -268,6 +268,49 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 483496438}
   m_CullTransparentMesh: 0
+--- !u!1 &500772431
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 500772433}
+  - component: {fileID: 500772432}
+  m_Layer: 0
+  m_Name: WordSelectionController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &500772432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500772431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef365b03f3d7f66429d8cdd7f6d3673d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &500772433
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500772431}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -460,7 +503,7 @@ RectTransform:
   - {fileID: 483496439}
   - {fileID: 1632306967}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -772,7 +815,7 @@ RectTransform:
   m_Children:
   - {fileID: 530006115}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -791,7 +834,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee4aa8861abac4042bb518bb9f7deca7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slot: {fileID: 2538957475596313008, guid: 76d35ca6dd0940a4886d680c089e0770, type: 3}
+  slotPrefab: {fileID: 2538957475596313008, guid: 76d35ca6dd0940a4886d680c089e0770,
+    type: 3}
   gridZeroPos: {fileID: 530006115}
   difficulty: 1
 --- !u!1 &1076285415
