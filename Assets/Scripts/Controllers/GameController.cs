@@ -37,9 +37,9 @@ namespace Scripts.Controllers
         {
             LevelGenerator level = FindObjectOfType<LevelGenerator>();
             if (level.difficulty == LevelGenerator.Difficulty.Easy)
-                amountOfWords = 6;
+                amountOfWords = 5;
             if (level.difficulty == LevelGenerator.Difficulty.Normal)
-                amountOfWords = 8;
+                amountOfWords = 7;
             if (level.difficulty == LevelGenerator.Difficulty.Hard)
                 amountOfWords = 10;
 
@@ -50,12 +50,14 @@ namespace Scripts.Controllers
         private string[] GetThemeWords()
         {
             if (theme == Theme.Fruits)
-                return new string[] { "BANANA", "GRAPE", "STRAWBERRY", "ACEROLA", "MANGO", "APPLE"
-                , "PEAR", "PEACH", "TAMARIND", "WATERMELON", "ORANGE", "TANGERINE", "PITANGA", "PAPAYA", "LEMON", "GUAVA"
-                , "CHERRY", "AVOCADO" };
+                return new string[] { "BANANA", "GRAPE", "ACEROLA", "MANGO", "APPLE", "PEAR", "PEACH",
+                    "ORANGE", "PITANGA", "PAPAYA", "LEMON", "GUAVA", "CHERRY", "AVOCADO" };
             if (theme == Theme.Vegetables)
-                return new string[] { "POTATO", "ONION", "CORN", "CARROT", "ZUCCHINI", "GINGER", "BEET", "MANIOC", "EGGPLANT"
-                , "YAM", "CHUCHU", "POD", "PEA", "JELLY", "OKRA", "CUCUMBER", "PUMPKIN", "PEPPER" };
+                return new string[] { "POTATO", "ONION", "CORN", "CARROT", "GINGER", "BEET", "MANIOC", "EGGPLANT"
+                , "YAM", "CHUCHU", "POD", "PEA", "JELLY", "OKRA", "PUMPKIN", "PEPPER" };
+            if (theme == Theme.Colors)
+                return new string[] { "RED", "GREEN", "BLUE", "CYAN", "MAGENTA", "YELLOW", "BLACK", "PURPLE", "PINK"
+                , "WHITE", "GRAY", "BROWN", "ORANGE", "GREY" };
             return null;
         }
 
@@ -99,6 +101,6 @@ namespace Scripts.Controllers
             }
         }
 
-        public enum Theme { Fruits, Vegetables }
+        public enum Theme { Fruits, Vegetables, Colors }
     }
 }

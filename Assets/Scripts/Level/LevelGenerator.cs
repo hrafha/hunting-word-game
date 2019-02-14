@@ -75,6 +75,10 @@ namespace Scripts.Level
                     y = Random.Range(0, lines);
                     path = WordFitsIn(word, x, y);
 
+                    if (path == 0) // Recently implemented to reduce a little the chances of word to fit the diagonal
+                        if (Random.Range(0, 100) <= 50)
+                            path = -1;
+
                     while (path == -1)
                     {
                         x = Random.Range(0, columns);
