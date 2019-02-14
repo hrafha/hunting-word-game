@@ -25,24 +25,15 @@ namespace Scripts.Controllers
         private void Update()
         {
             SelectionUpdate();
-            UpdateSelectionLine();
+            UpdateFeedbacks();
         }
 
         private void SelectionUpdate()
         {
             if (Input.GetMouseButtonDown(0))
-            {
                 firstPos = ToGridPos(firstSlot.transform.position);
-            }
             if (Input.GetMouseButtonUp(0))
-            {
                 lastPos = ToGridPos(lastSlot.transform.position);
-                if (ValidSelection() && StillNotFound(WordSelected()))
-                {
-                    FindObjectOfType<GameController>().RemoveWordFromGame(WordSelected());
-                    FindObjectOfType<GameHUD>().WordsUpdate(WordSelected());
-                }
-            }
         }
 
         private bool ValidSelection()
@@ -76,7 +67,8 @@ namespace Scripts.Controllers
             for (int i = 0; i < gameController.gameWords.Length; i++)
             {
                 if (word == gameController.gameWords.GetValue(i).ToString())
-                    return true;
+                    if (!gameController.wordsFound[i])
+                        return true;
             }
             return false;
         }
@@ -129,7 +121,7 @@ namespace Scripts.Controllers
             lastSlot = slot;
         }
 
-        private void UpdateSelectionLine()
+        private void UpdateFeedbacks()
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1));
             if (Input.GetMouseButtonDown(0))
@@ -143,6 +135,8 @@ namespace Scripts.Controllers
             {
                 if (ValidSelection() && StillNotFound(WordSelected()))
                 {
+                    FindObjectOfType<GameController>().RemoveWordFromGame(WordSelected());
+                    FindObjectOfType<GameHUD>().WordsUpdate(WordSelected());
                     SetLineColor(Color.green);
                     LineRenderer newLine = selectionLine;
                     Instantiate(newLine);

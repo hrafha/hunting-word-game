@@ -581,7 +581,7 @@ MonoBehaviour:
   slotPrefab: {fileID: 2538957475596313008, guid: 76d35ca6dd0940a4886d680c089e0770,
     type: 3}
   gridZeroPos: {fileID: 530006115}
-  difficulty: 1
+  difficulty: 0
 --- !u!1 &1076285415
 GameObject:
   m_ObjectHideFlags: 0
@@ -611,8 +611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d7de7732a1fea49811a1049cabf67f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  theme: 0
-  amountOfWords: 5
+  theme: 1
 --- !u!4 &1076285417
 Transform:
   m_ObjectHideFlags: 0

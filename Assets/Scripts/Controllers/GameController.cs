@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Scripts.Level;
 
 namespace Scripts.Controllers
 {
@@ -7,7 +8,7 @@ namespace Scripts.Controllers
 
         public Theme theme;
 
-        public int amountOfWords = 3;
+        public int amountOfWords { get; private set; }
 
         public string[] themeWords { get; private set; }
         public string[] gameWords { get; private set; }
@@ -20,8 +21,7 @@ namespace Scripts.Controllers
             themeWords = GetThemeWords();
             availableThemeWords = new bool[themeWords.Length];
 
-            if (amountOfWords > themeWords.Length)
-                amountOfWords = themeWords.Length;
+            SetAmountOfWords();
 
             gameWords = GetGameWords();
             wordsFound = new bool[gameWords.Length];
@@ -33,12 +33,29 @@ namespace Scripts.Controllers
                 Time.timeScale = 0f;
         }
 
+        private void SetAmountOfWords()
+        {
+            LevelGenerator level = FindObjectOfType<LevelGenerator>();
+            if (level.difficulty == LevelGenerator.Difficulty.Easy)
+                amountOfWords = 6;
+            if (level.difficulty == LevelGenerator.Difficulty.Normal)
+                amountOfWords = 8;
+            if (level.difficulty == LevelGenerator.Difficulty.Hard)
+                amountOfWords = 10;
+
+            if (amountOfWords > themeWords.Length)
+                amountOfWords = themeWords.Length;
+        }
+
         private string[] GetThemeWords()
         {
-            if (theme == Theme.Frutas)
-                return new string[] { "BANANA", "UVA", "MORANGO", "ABACAXI", "ACEROLA", "MANGA" };
-            if (theme == Theme.Legumes)
-                return new string[] { "BATATA", "CEBOLA", "MILHO", "CENOURA", "ABOBRINHA", "GENGIBRE" };
+            if (theme == Theme.Fruits)
+                return new string[] { "BANANA", "GRAPE", "STRAWBERRY", "ACEROLA", "MANGO", "APPLE"
+                , "PEAR", "PEACH", "TAMARIND", "WATERMELON", "ORANGE", "TANGERINE", "PITANGA", "PAPAYA", "LEMON", "GUAVA"
+                , "CHERRY", "AVOCADO" };
+            if (theme == Theme.Vegetables)
+                return new string[] { "POTATO", "ONION", "CORN", "CARROT", "ZUCCHINI", "GINGER", "BEET", "MANIOC", "EGGPLANT"
+                , "YAM", "CHUCHU", "POD", "PEA", "JELLY", "OKRA", "CUCUMBER", "PUMPKIN", "PEPPER" };
             return null;
         }
 
@@ -82,6 +99,6 @@ namespace Scripts.Controllers
             }
         }
 
-        public enum Theme { Frutas, Legumes }
+        public enum Theme { Fruits, Vegetables }
     }
 }
