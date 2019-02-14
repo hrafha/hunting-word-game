@@ -3,6 +3,8 @@
 public class WordSelectionController : MonoBehaviour
 {
 
+    [SerializeField] private LineRenderer selectionLine;
+
     private LevelGenerator level;
 
     public Slot firstSlot { get; private set; }
@@ -19,6 +21,7 @@ public class WordSelectionController : MonoBehaviour
     private void Update()
     {
         SelectionUpdate();
+        UpdateSelectionLine();
     }
 
     private void SelectionUpdate()
@@ -30,13 +33,10 @@ public class WordSelectionController : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             lastPos = ToGridPos(lastSlot.transform.position);
-            if (ValidSelection())
+            if (ValidSelection() && StillNotFound(WordSelected()))
             {
-                if (StillNotFound(WordSelected()))
-                {
-                    FindObjectOfType<GameController>().RemoveWordFromGame(WordSelected());
-                    FindObjectOfType<GameHUD>().WordsUpdate();
-                }
+                FindObjectOfType<GameController>().RemoveWordFromGame(WordSelected());
+                FindObjectOfType<GameHUD>().WordsUpdate();
             }
         }
     }
@@ -123,6 +123,40 @@ public class WordSelectionController : MonoBehaviour
     public void SetLastSlot(Slot slot)
     {
         lastSlot = slot;
+    }
+
+    private void UpdateSelectionLine()
+    {
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1));
+        if (Input.GetMouseButtonDown(0))
+        {
+            SetLineColor(Color.cyan);
+            selectionLine.SetPosition(0, firstSlot.transform.position);
+        }
+        if (Input.GetMouseButton(0)) // Is selecting
+            selectionLine.SetPosition(1, mousePos);
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (ValidSelection() && StillNotFound(WordSelected()))
+            {
+                SetLineColor(Color.green);
+                LineRenderer newLine = selectionLine;
+                Instantiate(newLine);
+                SetLineColor(Color.clear);
+            }
+            else if (ValidSelection())
+                SetLineColor(Color.red);
+            else
+                SetLineColor(Color.clear);
+        }
+    }
+
+    private void SetLineColor(Color color)
+    {
+        if(color != Color.clear)
+            color = new Color(color.r, color.g, color.b, 0.4f);
+        selectionLine.startColor = color;
+        selectionLine.endColor = color;
     }
 
 }
