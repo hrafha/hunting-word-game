@@ -30,12 +30,51 @@ public class WordSelectionController : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             lastPos = ToGridPos(lastSlot.transform.position);
+            if (ValidSelection())
+            {
+                if (StillNotFound(WordSelected()))
+                {
+                    FindObjectOfType<GameController>().RemoveWordFromGame(WordSelected());
+                    FindObjectOfType<GameHUD>().WordsUpdate();
+                }
+            }
         }
     }
 
     private bool ValidSelection()
     {
         return SelectionLenght(SelectionPath()) >= 0;
+    }
+
+    private string WordSelected()
+    {
+        string word = "";
+        int path = SelectionPath();
+        int amountLetters = SelectionLenght(path);
+        int x = (int)firstPos.x;
+        int y = (int)firstPos.y;
+
+        if (path == 0) // Diagonal
+            for (int i = 0; i < amountLetters; i++)
+                word += level.slots[x + i, y + i].letter.value;
+        else if (path == 1) // Horizontal
+            for (int i = 0; i < amountLetters; i++)
+                word += level.slots[x + i, y].letter.value;
+        else if (path == 2) // Vertical
+            for (int i = 0; i < amountLetters; i++)
+                word += level.slots[x, y + i].letter.value;
+        return word;
+    }
+
+    private bool StillNotFound(string word)
+    {
+        GameController gameController = FindObjectOfType<GameController>();
+        for (int i = 0; i < gameController.gameWords.Length; i++)
+        {
+            if (word == gameController.gameWords.GetValue(i).ToString())
+                return true;
+        }
+        return false;
     }
 
     private int SelectionPath()

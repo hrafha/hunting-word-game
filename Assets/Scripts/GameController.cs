@@ -68,5 +68,14 @@ public class GameController : MonoBehaviour
         return count == amountOfWords;
     }
 
+    public void RemoveWordFromGame(string word)
+    {
+        for (int i = 0; i < gameWords.Length; i++)
+        {
+            if (word == gameWords.GetValue(i).ToString())
+                wordsFound[i] = true;
+        }
+    }
+
     public enum Theme { Frutas, Legumes }
 }

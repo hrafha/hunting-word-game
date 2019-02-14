@@ -23,6 +23,8 @@ public class GameHUD : MonoBehaviour
 
     public void WordsUpdate()
     {
+        wordsFound.text = "Words Found:\n";
+        wordsLeft.text = "Words Left:\n";
         for (int i = 0; i < gameController.wordsFound.Length; i++)
         {
             if (gameController.wordsFound[i])
