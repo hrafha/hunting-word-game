@@ -19,7 +19,7 @@ namespace Scripts.Controllers
 
         private void Start()
         {
-            level = FindObjectOfType<LevelGenerator>();
+            level = FindFirstObjectByType<LevelGenerator>();
         }
 
         private void Update()
@@ -63,7 +63,7 @@ namespace Scripts.Controllers
 
         private bool StillNotFound(string word)
         {
-            GameController gameController = FindObjectOfType<GameController>();
+            GameController gameController = FindFirstObjectByType<GameController>();
             for (int i = 0; i < gameController.gameWords.Length; i++)
             {
                 if (word == gameController.gameWords.GetValue(i).ToString())
@@ -135,8 +135,8 @@ namespace Scripts.Controllers
             {
                 if (ValidSelection() && StillNotFound(WordSelected()))
                 {
-                    FindObjectOfType<GameController>().RemoveWordFromGame(WordSelected());
-                    FindObjectOfType<GameHUD>().WordsUpdate(WordSelected());
+                    FindFirstObjectByType<GameController>().RemoveWordFromGame(WordSelected());
+                    FindFirstObjectByType<GameHUD>().WordsUpdate(WordSelected());
                     SetLineColor(Color.green);
                     LineRenderer newLine = selectionLine;
                     Instantiate(newLine);

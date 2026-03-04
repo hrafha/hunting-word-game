@@ -1,10 +1,22 @@
 ﻿using UnityEngine;
 using Scripts.Controllers;
+using Scripts.Interfaces;
 
 namespace Scripts.Level
 {
-    public class LevelGenerator : MonoBehaviour
+    public class LevelGenerator : MonoBehaviour, IComponentInitialization
     {
+        #region Interfaces
+
+        public bool Initialized()
+        {
+            if (gameController == null)
+                gameController = FindFirstObjectByType<GameController>();
+
+            return true;
+        }
+
+        #endregion /Interfaces;
 
         private GameController gameController;
 
@@ -19,10 +31,13 @@ namespace Scripts.Level
         public int columns { get; private set; }
         public int lines { get; private set; }
 
+        private void Awake()
+        {
+            Initialized();
+        }
+
         private void Start()
         {
-            gameController = FindObjectOfType<GameController>();
-
             CheckDifficulty();
             CreateGrid();
             FitWords();

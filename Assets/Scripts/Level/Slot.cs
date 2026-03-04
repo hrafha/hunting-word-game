@@ -13,7 +13,7 @@ namespace Scripts.Level
 
         private void Start()
         {
-            wordSelection = FindObjectOfType<WordSelectionController>();
+            wordSelection = FindFirstObjectByType<WordSelectionController>();
         }
 
         private void OnMouseOver()

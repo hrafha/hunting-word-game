@@ -14,9 +14,20 @@ namespace Scripts.HUDs
         [SerializeField] Text wordsLeft;
         [SerializeField] Text wordsFound;
 
+        [Header("Debug")]
+        public string logErrorFormat = "[{0}]> {1}";
+
         private void Start()
         {
-            gameController = FindObjectOfType<GameController>();
+            gameController = FindFirstObjectByType<GameController>();
+
+            if (gameController == null)
+            {
+                Debug.LogError(string.Format(logErrorFormat, gameObject.name, "Cancel Initialization. GameController not found!"));
+                gameObject.SetActive(false);
+                return;
+            }
+
             theme.text = gameController.theme.ToString();
 
             wordsFound.text = "Words Found:\n";

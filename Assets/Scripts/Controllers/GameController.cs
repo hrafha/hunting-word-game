@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Scripts.Level;
+using Scripts.Data;
 
 namespace Scripts.Controllers
 {
@@ -35,7 +36,7 @@ namespace Scripts.Controllers
 
         private void SetAmountOfWords()
         {
-            LevelGenerator level = FindObjectOfType<LevelGenerator>();
+            LevelGenerator level = FindFirstObjectByType<LevelGenerator>();
             if (level.difficulty == LevelGenerator.Difficulty.Easy)
                 amountOfWords = 5;
             if (level.difficulty == LevelGenerator.Difficulty.Normal)
@@ -100,7 +101,5 @@ namespace Scripts.Controllers
                     wordsFound[i] = true;
             }
         }
-
-        public enum Theme { Fruits, Vegetables, Colors }
     }
 }
