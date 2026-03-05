@@ -68,7 +68,6 @@
     <Compile Include="Assets\Scripts\Level\LevelGenerator.cs" />
     <Compile Include="Assets\Scripts\Data\GameData.cs" />
     <Compile Include="Assets\Scripts\Controllers\WordSelectionController.cs" />
-    <Compile Include="Assets\Scripts\Interfaces\IComponentInitialization.cs" />
     <Compile Include="Assets\Scripts\Level\Letter.cs" />
   </ItemGroup>
   <ItemGroup>

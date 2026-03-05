@@ -9,7 +9,7 @@ namespace Scripts.Controllers
 
         [SerializeField] private LineRenderer selectionLine;
 
-        private LevelGenerator level;
+        public LevelGenerator levelGenerator;
 
         public Slot firstSlot { get; private set; }
         public Slot lastSlot { get; private set; }
@@ -19,7 +19,7 @@ namespace Scripts.Controllers
 
         private void Start()
         {
-            level = FindFirstObjectByType<LevelGenerator>();
+            levelGenerator = FindFirstObjectByType<LevelGenerator>();
         }
 
         private void Update()
@@ -51,13 +51,13 @@ namespace Scripts.Controllers
 
             if (path == 0) // Diagonal
                 for (int i = 0; i < amountLetters; i++)
-                    word += level.slots[x + i, y + i].letter.value;
+                    word += levelGenerator.slots[x + i, y + i].letter.value;
             else if (path == 1) // Horizontal
                 for (int i = 0; i < amountLetters; i++)
-                    word += level.slots[x + i, y].letter.value;
+                    word += levelGenerator.slots[x + i, y].letter.value;
             else if (path == 2) // Vertical
                 for (int i = 0; i < amountLetters; i++)
-                    word += level.slots[x, y + i].letter.value;
+                    word += levelGenerator.slots[x, y + i].letter.value;
             return word;
         }
 
@@ -75,8 +75,8 @@ namespace Scripts.Controllers
 
         private int SelectionPath()
         {
-            int aux = Mathf.Max(level.columns, level.lines);
-            for (int i = (int)firstPos.x; i < level.columns; i++)
+            int aux = Mathf.Max(levelGenerator.columns, levelGenerator.lines);
+            for (int i = (int)firstPos.x; i < levelGenerator.columns; i++)
             {
                 for (int k = 0; k < aux; k++)
                 {
@@ -87,7 +87,7 @@ namespace Scripts.Controllers
                 if (new Vector3(i, (int)firstPos.y) == lastPos)
                     return 1; // Horizontal
 
-                for (int j = (int)firstPos.y; j < level.lines; j++)
+                for (int j = (int)firstPos.y; j < levelGenerator.lines; j++)
                 {
                     if (new Vector3((int)firstPos.x, j) == lastPos)
                         return 2; // Vertical
@@ -108,7 +108,7 @@ namespace Scripts.Controllers
 
         private Vector3 ToGridPos(Vector3 position)
         {
-            return position - level.gridZeroPos.position;
+            return position - levelGenerator.gridZeroPos.position;
         }
 
         public void SetFirstSlot(Slot slot)

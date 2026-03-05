@@ -1,24 +1,12 @@
 ﻿using UnityEngine;
 using Scripts.Controllers;
-using Scripts.Interfaces;
 
 namespace Scripts.Level
 {
-    public class LevelGenerator : MonoBehaviour, IComponentInitialization
+    public class LevelGenerator : MonoBehaviour
     {
-        #region Interfaces
 
-        public bool Initialized()
-        {
-            if (gameController == null)
-                gameController = FindFirstObjectByType<GameController>();
-
-            return true;
-        }
-
-        #endregion /Interfaces;
-
-        private GameController gameController;
+        public GameController gameController;
 
         [SerializeField] private Slot slotPrefab;
 
@@ -33,7 +21,8 @@ namespace Scripts.Level
 
         private void Awake()
         {
-            Initialized();
+            if (gameController == null)
+                gameController = FindFirstObjectByType<GameController>();
         }
 
         private void Start()

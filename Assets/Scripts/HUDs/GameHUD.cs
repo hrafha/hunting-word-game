@@ -7,7 +7,7 @@ namespace Scripts.HUDs
     public class GameHUD : MonoBehaviour
     {
 
-        private GameController gameController;
+        public GameController gameController;
 
         [SerializeField] GameObject gameOverMenu;
         [SerializeField] Text theme;
