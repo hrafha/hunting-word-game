@@ -60,15 +60,34 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2023.1.22f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Game\HUDs\GameHUD.cs" />
+    <Compile Include="Assets\Scripts\Sound\SoundSettings.cs" />
+    <Compile Include="Assets\Scripts\Utility\DynamicValue.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Data\Level\LevelData.cs" />
     <Compile Include="Assets\Scripts\Utility\OnClickMethods.cs" />
-    <Compile Include="Assets\Scripts\HUDs\GameHUD.cs" />
-    <Compile Include="Assets\Scripts\Controllers\GameController.cs" />
-    <Compile Include="Assets\Scripts\Level\Slot.cs" />
-    <Compile Include="Assets\Scripts\Level\LevelGenerator.cs" />
-    <Compile Include="Assets\Scripts\Data\GameData.cs" />
-    <Compile Include="Assets\Scripts\Controllers\WordSelectionController.cs" />
-    <Compile Include="Assets\Scripts\Level\Letter.cs" />
+    <Compile Include="Assets\Scripts\Data\Game\GameData.cs" />
+    <Compile Include="Assets\Scripts\Core\SceneLoader.cs" />
+    <Compile Include="Assets\Scripts\Utility\TransformUtility.cs" />
+    <Compile Include="Assets\Scripts\Data\Player\PlayerDataViewer.cs" />
+    <Compile Include="Assets\Scripts\Game\Level\Letter.cs" />
+    <Compile Include="Assets\Scripts\Core\ApplicationManager.cs" />
+    <Compile Include="Assets\Scripts\Game\Controllers\WordSelectionController.cs" />
+    <Compile Include="Assets\Scripts\Game\Level\Slot.cs" />
+    <Compile Include="Assets\Scripts\Game\Level\LevelGenerator.cs" />
+    <Compile Include="Assets\Scripts\Utility\DynamicSafeArea.cs" />
+    <Compile Include="Assets\Scripts\Utility\FixedRotation.cs" />
+    <Compile Include="Assets\Scripts\Utility\FrameRateSetup.cs" />
+    <Compile Include="Assets\Scripts\Core\AssetsManager.cs" />
+    <Compile Include="Assets\Scripts\Sound\SoundManager.cs" />
+    <Compile Include="Assets\Scripts\Utility\AnimationUtility.cs" />
+    <Compile Include="Assets\Scripts\Data\Player\PlayerManager.cs" />
+    <Compile Include="Assets\Scripts\Data\Player\PlayerData.cs" />
+    <Compile Include="Assets\Scripts\Sound\SoundController.cs" />
+    <Compile Include="Assets\Scripts\Game\Controllers\GameController.cs" />
+    <Compile Include="Assets\Scripts\Core\Constants.cs" />
+    <Compile Include="Assets\Scripts\Utility\AutoDestruction.cs" />
+    <Compile Include="Assets\Scripts\Utility\VectorUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

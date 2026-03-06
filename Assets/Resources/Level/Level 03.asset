@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff464c3016b983a4c98b8f69658e3b79, type: 3}
+  m_Name: Level 03
+  m_EditorClassIdentifier: 
+  level: 2
+  difficulty: 2
+  themeWords:
+    theme: 2
+    levelWords:
+    - RED
+    - GREEN
+    - BLUE
+    - CYAN
+    - MAGENTA
+    - YELLOW
+    - BLACK
+    - PURPLE
+    - PINK
+    - WHITE
+    - GRAY
+    - BROWN
+    - ORANGE
+    - GREY

@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Data.Game;
+using Data.User;
 using Scripts.Controllers;
-using Scripts.Data;
 using Scripts.HUDs;
 using Scripts.Level;
 using Scripts.Utility;
+using Utility;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 
