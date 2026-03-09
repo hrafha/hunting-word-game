@@ -13,10 +13,13 @@ MonoBehaviour:
   m_Name: Level 03
   m_EditorClassIdentifier: 
   level: 2
-  difficulty: 2
-  themeWords:
+  difficultySettings:
+    difficulty: 2
+    amountOfWords: 10
+    wordsFoundHandcap: 0
+  themeWordsSettings:
     theme: 2
-    levelWords:
+    themeWordsOffline:
     - RED
     - GREEN
     - BLUE

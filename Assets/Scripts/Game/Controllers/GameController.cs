@@ -1,48 +1,74 @@
 ﻿using UnityEngine;
-using Scripts.Level;
+using GameSystems.Level;
+using UnityEngine.Events;
 using Data.Game;
 
-namespace Scripts.Controllers
+namespace GameSystems.Controllers
 {
     public class GameController : MonoBehaviour
     {
 
         public Theme theme;
 
-        public int amountOfWords { get; private set; }
+        public int amountOfWords;
 
-        public string[] themeWords { get; private set; }
-        public string[] gameWords { get; private set; }
+        public string[] themeWords;
+        public string[] gameWords;
 
         public bool[] availableThemeWords { get; private set; }
         public bool[] wordsFound { get; private set; }
 
+
+        public event UnityAction<string> OnRemoveWordFromGame = null;
+
+
         private void Awake()
         {
-            themeWords = GetThemeWords();
+            Setup(GetThemeWords());
+        }
+
+        private void OnEnable()
+        {
+            OnRemoveWordFromGame += (word) => CheckGameOver();
+        }
+        private void OnDisable()
+        {
+            OnRemoveWordFromGame -= (word) => CheckGameOver();
+        }
+
+        public void Setup(string[] words, int? amount = null)
+        {
+            themeWords = words;
             availableThemeWords = new bool[themeWords.Length];
 
-            SetAmountOfWords();
+            SetAmountOfWords(amount);
 
             gameWords = GetGameWords();
             wordsFound = new bool[gameWords.Length];
         }
 
-        private void Update()
+        private void CheckGameOver()
         {
             if (GameOver())
+            {
                 Time.timeScale = 0f;
+
+                PlayerManager.Player.gameplayLevel.Value++;
+            }
         }
 
-        private void SetAmountOfWords()
+        private void SetAmountOfWords(int? value = null)
         {
-            LevelGenerator level = FindFirstObjectByType<LevelGenerator>();
-            if (level.difficulty == Difficulty.Easy)
-                amountOfWords = 5;
-            if (level.difficulty == Difficulty.Normal)
-                amountOfWords = 7;
-            if (level.difficulty == Difficulty.Hard)
-                amountOfWords = 10;
+            //LevelGenerator level = FindFirstObjectByType<LevelGenerator>();
+            //if (level.difficulty == Difficulty.Easy)
+            //    amountOfWords = 5;
+            //if (level.difficulty == Difficulty.Normal)
+            //    amountOfWords = 7;
+            //if (level.difficulty == Difficulty.Hard)
+            //    amountOfWords = 10;
+
+            if (value != null)
+                amountOfWords = value.Value;
 
             if (amountOfWords > themeWords.Length)
                 amountOfWords = themeWords.Length;
@@ -100,6 +126,7 @@ namespace Scripts.Controllers
                 if (word == gameWords.GetValue(i).ToString())
                     wordsFound[i] = true;
             }
+            OnRemoveWordFromGame?.Invoke(word);
         }
     }
 }

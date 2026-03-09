@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
-using Scripts.Controllers;
+using GameSystems.Controllers;
 using Data.Game;
 
-namespace Scripts.Level
+namespace GameSystems.Level
 {
     public class LevelGenerator : MonoBehaviour
     {

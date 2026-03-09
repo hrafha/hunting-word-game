@@ -4,11 +4,14 @@ namespace Core
 {
     using Data.Level;
     using System.Collections.Generic;
+    using UnityEngine.Events;
 
     public static class ApplicationManager
     {
         public static int levelToLoop;
         public static AssetReference<LevelData> gameplayLevels;
+
+        public static event UnityAction<ApplicationScene, LoadSceneMode> OnSceneLoad = null;
 
 
         public static LevelData GetLevelData(int level)
@@ -44,7 +47,10 @@ namespace Core
             string sceneName = GetSceneName(scene);
 
             if (!string.IsNullOrEmpty(sceneName))
+            {
                 SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
+                OnSceneLoad?.Invoke(scene, LoadSceneMode.Single);
+            }
         }
 
 

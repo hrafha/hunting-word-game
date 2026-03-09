@@ -3,7 +3,12 @@ guid: 857abc0200d35df4ea31de61c7388d47
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - gameData: {fileID: 11400000, guid: 99c27b98e7675de4e90d74c5333f8a08, type: 2}
+  - gameController: {instanceID: 0}
+  - wordSelectionController: {instanceID: 0}
+  - gameHUD: {instanceID: 0}
+  - levelGenerator: {instanceID: 0}
   executionOrder: -10
   icon: {instanceID: 0}
   userData: 

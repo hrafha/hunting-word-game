@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\Data\Player\PlayerDataViewer.cs" />
     <Compile Include="Assets\Scripts\Game\Level\Letter.cs" />
     <Compile Include="Assets\Scripts\Core\ApplicationManager.cs" />
+    <Compile Include="Assets\Scripts\Data\Game\Uniques\GD_HuntingWords.cs" />
     <Compile Include="Assets\Scripts\Game\Controllers\WordSelectionController.cs" />
     <Compile Include="Assets\Scripts\Game\Level\Slot.cs" />
     <Compile Include="Assets\Scripts\Game\Level\LevelGenerator.cs" />

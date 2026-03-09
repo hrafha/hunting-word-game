@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using Scripts.Controllers;
+using GameSystems.Controllers;
 
-namespace Scripts.Level
+namespace GameSystems.Level
 {
     [RequireComponent(typeof(Image))]
     public class Slot : MonoBehaviour

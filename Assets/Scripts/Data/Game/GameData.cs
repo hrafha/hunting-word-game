@@ -1,4 +1,5 @@
 using Data.Level;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Data.Game
@@ -6,6 +7,11 @@ namespace Data.Game
     [CreateAssetMenu(menuName = "Data/Game")]
     public class GameData : ScriptableObject
     {
+        [Header("Settings")]
+        public List<LevelData> levels;
+        [Header("Runtime")]
+        public GameState gameState;
+
         [System.Serializable]
         public struct GameState
         {
@@ -13,8 +19,4 @@ namespace Data.Game
             public LevelData currentLevel;
         }
     }
-
-    public enum Difficulty { Easy, Normal, Hard };
-    public enum Theme { Fruits, Vegetables, Colors }
-
 }

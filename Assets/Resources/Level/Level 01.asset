@@ -13,10 +13,13 @@ MonoBehaviour:
   m_Name: Level 01
   m_EditorClassIdentifier: 
   level: 0
-  difficulty: 0
-  themeWords:
+  difficultySettings:
+    difficulty: 0
+    amountOfWords: 5
+    wordsFoundHandcap: 0
+  themeWordsSettings:
     theme: 0
-    levelWords:
+    themeWordsOffline:
     - BANANA
     - GRAPE
     - ACEROLA
@@ -31,50 +34,3 @@ MonoBehaviour:
     - GUAVA
     - CHERRY
     - AVOCADO
-    strings:
-    - BANANA
-    - GRAPE
-    - ACEROLA
-    - MANGO
-    - APPLE
-    - PEAR
-    - PEACH
-    - ORANGE
-    - PITANGA
-    - PAPAYA
-    - LEMON
-    - GUAVA
-    - CHERRY
-    - AVOCADO
-    stringsx:
-    - POTATO
-    - ONION
-    - CORN
-    - CARROT
-    - GINGER
-    - BEET
-    - MANIOC
-    - EGGPLANT
-    - YAM
-    - CHUCHU
-    - POD
-    - PEA
-    - JELLY
-    - OKRA
-    - PUMPKIN
-    - PEPPER
-    stringsz:
-    - RED
-    - GREEN
-    - BLUE
-    - CYAN
-    - MAGENTA
-    - YELLOW
-    - BLACK
-    - PURPLE
-    - PINK
-    - WHITE
-    - GRAY
-    - BROWN
-    - ORANGE
-    - GREY

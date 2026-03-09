@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Scripts.Utility
+namespace GameSystems.Utility
 {
     using Core;
 

@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
-using Scripts.HUDs;
-using Scripts.Level;
+using GameSystems.HUDs;
+using GameSystems.Level;
 
-namespace Scripts.Controllers
+namespace GameSystems.Controllers
 {
     public class WordSelectionController : MonoBehaviour
     {

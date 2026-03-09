@@ -13,10 +13,13 @@ MonoBehaviour:
   m_Name: Level 02
   m_EditorClassIdentifier: 
   level: 1
-  difficulty: 1
-  themeWords:
+  difficultySettings:
+    difficulty: 1
+    amountOfWords: 7
+    wordsFoundHandcap: 0
+  themeWordsSettings:
     theme: 1
-    levelWords:
+    themeWordsOffline:
     - POTATO
     - ONION
     - CORN

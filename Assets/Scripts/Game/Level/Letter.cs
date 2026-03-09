@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Scripts.Level
+namespace GameSystems.Level
 {
     [RequireComponent(typeof(Text))]
     public class Letter : MonoBehaviour

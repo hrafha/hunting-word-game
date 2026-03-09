@@ -287,6 +287,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectionLine: {fileID: 441503723}
+  levelGenerator: {fileID: 0}
 --- !u!4 &500772433
 Transform:
   m_ObjectHideFlags: 0
@@ -613,6 +614,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96a8245ec7461144481529a86f4b9ec7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameController: {fileID: 0}
   slotPrefab: {fileID: 2538957475596313008, guid: afec25a59673f0743b5fe86a5f8fdcb4,
     type: 3}
   gridZeroPos: {fileID: 530006115}
@@ -647,6 +649,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theme: 0
+  amountOfWords: 0
+  themeWords: []
+  gameWords: []
 --- !u!4 &1076285417
 Transform:
   m_ObjectHideFlags: 0

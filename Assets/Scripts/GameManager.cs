@@ -1,13 +1,15 @@
 using UnityEngine;
 using Data.Game;
 using Data.User;
-using Scripts.Controllers;
-using Scripts.HUDs;
-using Scripts.Level;
-using Scripts.Utility;
+using GameSystems.Controllers;
+using GameSystems.HUDs;
+using GameSystems.Level;
+using GameSystems.Utility;
 using Utility;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
+using Data.Level;
+using Core;
 
 public class GameManager : MonoBehaviour
 {
@@ -41,11 +43,6 @@ public class GameManager : MonoBehaviour
         SingletonAwake();
         BindSystemsAndDatas();
         RefreshSystems();
-    }
-
-    private void Start()
-    {
-        OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
     }
 
     private void OnEnable()
@@ -84,6 +81,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private LevelGenerator levelGenerator;
 
     public static GameData GameData { get => Instance.gameData; set => Instance.gameData = value; }
+    public static LevelData CurrentLevel => GameData?.gameState.currentLevel;
 
     public static GameController GameController { get => Instance.gameController; set => Instance.gameController = value; }
     public static WordSelectionController WordSelectionController { get => Instance.wordSelectionController; set => Instance.wordSelectionController = value; }
@@ -102,6 +100,8 @@ public class GameManager : MonoBehaviour
         if (GameData == null)
             GameData = new GameData();
 
+        RefreshCurrentLevel();
+
         GameController = FindFirstObjectByType<GameController>();
         levelGenerator = FindFirstObjectByType<LevelGenerator>();
         wordSelectionController = FindFirstObjectByType<WordSelectionController>();
@@ -117,15 +117,56 @@ public class GameManager : MonoBehaviour
 
     private void RefreshSystems()
     {
-        RefreshLevelGenerator();
+        LevelData levelData = CurrentLevel;
+        RefreshGameController(levelData);
+        RefreshLevelGenerator(levelData);
         RefreshWordSelectionController();
         RefreshGameHUD();
     }
 
-    private void RefreshLevelGenerator()
+    private void RefreshCurrentLevel()
+    {
+        var GD = gameData as GD_HuntingWords;
+        if (GD == null) return;
+        if (GD.levels.Count == 0)
+            GD.levels = ApplicationManager.gameplayLevels.Assets;
+
+        int maxLevel = gameData.levels.Count - 1;
+        if (maxLevel <= 0)
+            return; //TODO: lvData = LevelData.GetDummy();
+
+        LevelData levelData = new LevelData()
+        {
+            level = 0,
+            difficultySettings = gameData.levels[Random.Range(0, maxLevel)].difficultySettings,
+            themeWordsSettings = gameData.levels[Random.Range(0, maxLevel)].themeWordsSettings,
+        };
+
+        var player = PlayerManager.Player;
+        if (player != null)
+            levelData = gameData.levels[Mathf.Min(player.gameplayLevel.Value, maxLevel)];
+
+        gameData.gameState.currentLevel = levelData;
+    }
+
+    private void RefreshGameController(LevelData levelData)
+    {
+        if (gameController != null)
+        {
+            gameController.Setup(levelData.themeWordsSettings.themeWordsOffline, levelData.difficultySettings.amountOfWords);
+            gameController.theme = levelData.themeWordsSettings.theme;
+            //gameController.difficulty = levelData.difficultySettings.difficulty; //TODO: controller challanges?
+            //gameController.wordsFoundHandcap = levelData.difficultySettings.wordsFoundHandcap; //TODO: wordsFoundHancap system
+        }
+    }
+
+    private void RefreshLevelGenerator(LevelData levelData)
     {
         if (levelGenerator != null)
+        {
             levelGenerator.gameController = gameController;
+            levelGenerator.difficulty = levelData.difficultySettings.difficulty;
+        }
     }
 
     private void RefreshWordSelectionController()
